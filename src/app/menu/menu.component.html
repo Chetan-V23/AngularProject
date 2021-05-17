@@ -10,7 +10,7 @@
     </div>
     <div fxFlex>
         <mat-grid-list cols="2" rowHeight="100px">
-            <mat-grid-tile *ngFor="let dish of dishes" (click)="onSelect(dish)" >
+            <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetails',dish.id]" >
                 <img height="200px" src={{dish.image}} alt={dish.name}>
                 <mat-grid-tile-footer>
                     <h1 matLine>{{dish.name | uppercase}}</h1>
@@ -34,9 +34,7 @@
                 <button mat-button>LIKE</button>
                 <button mat-button>SHARE</button>
             </mat-card-actions>
-        </mat-card>
-    </div> -->
-    <app-dishdetails [dish]="selectedDish"></app-dishdetails>
+        </mat-card>  -->
 
 
 </div>

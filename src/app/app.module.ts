@@ -22,6 +22,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { LeaderService } from './services/leader.service';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { FooterComponent } from './footer/footer.component';
   providers: [
     DishService,
     PromotionService,
+    LeaderService,
   ],
   bootstrap: [AppComponent]
 })
