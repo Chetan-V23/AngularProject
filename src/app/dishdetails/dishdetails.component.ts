@@ -41,6 +41,7 @@ export class DishdetailsComponent implements OnInit {
   next!:string;
   date!:string;
   errMess?:string;
+  dishcopy!:Dish;
   constructor( private dishService:DishService, private location:Location, private route:ActivatedRoute, private fb: FormBuilder, @Inject('BaseURL') public BaseURL) {
     this.createForm();
    }
@@ -50,7 +51,7 @@ export class DishdetailsComponent implements OnInit {
     this.dishService.getDishIds().subscribe((dishIds)=>this.dishIds=dishIds)
     
      this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-     .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },errmess=>this.errMess=<any>errmess);
+     .subscribe(dish => { this.dish = dish; this.dishcopy=dish, this.setPrevNext(dish.id); },errmess=>this.errMess=<any>errmess);
 
      
 
@@ -110,7 +111,13 @@ export class DishdetailsComponent implements OnInit {
     comment.author=value.name;
     comment.comment=value.comment;
     comment.date=this.date;
-    this.dish.comments.push(comment);
+    this.dishcopy.comments.push(comment);
+    this.dishService.putDish(this.dishcopy).subscribe(dish=>{
+      this.dish=dish; this.dishcopy=dish;
+    },
+    errMess=>{
+      this.dish!=null; this.dishcopy!=null; this.errMess=<any> errMess;
+    });
 
     this.commentForm.reset({
       name:'',
